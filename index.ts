@@ -24,7 +24,7 @@ export default class AdminForthAdapterGithubOauth2 implements OAuth2Adapter {
       return url;
     }
   
-    async getTokenFromCode(code: string, redirect_uri: string): Promise<{ email: string;}> {
+    async getTokenFromCode(code: string, redirect_uri: string): Promise<{ email: string, fullName: string, profilePictureUrl?: string }> {
       console.log('Getting token from code:', code);
       
       // Exchange code for token
@@ -79,6 +79,8 @@ export default class AdminForthAdapterGithubOauth2 implements OAuth2Adapter {
   
       return {
         email: userData.email,
+        profilePictureUrl: userData.avatar_url,
+        fullName: userData.name
       };
     }
     getIcon(): string {
